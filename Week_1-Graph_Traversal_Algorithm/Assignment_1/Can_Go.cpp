@@ -45,6 +45,7 @@ int main()
     pair<int, int> src;
     pair<int, int> des;
     for (int i = 0; i < n; i++)
+    {
         for (int j = 0; j < m; j++)
         {
             cin >> grid[i][j];
@@ -59,6 +60,7 @@ int main()
                 des.second = j;
             }
         }
+    }
 
     int si = src.first, sj = src.second, di = des.first, dj = des.second;
     memset(vis, false, sizeof(vis));
