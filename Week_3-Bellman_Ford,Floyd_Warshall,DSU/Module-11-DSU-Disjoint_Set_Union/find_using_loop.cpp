@@ -2,7 +2,7 @@
 using namespace std;
 int par[1005];
 
-int find(int node)
+int find(int node)      //-->O(N)
 {
     while (par[node] = -1)
     {

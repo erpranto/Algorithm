@@ -26,7 +26,7 @@ void dsu_union(int node1, int node2)
         group_size[leader2] += group_size[leader1];
     }
 }
-
+    
 int main()
 {
     memset(par, -1, sizeof(par));

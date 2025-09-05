@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-int par[1005];
-int group_size[1005];
+int par[100005];
+int group_size[100005];
 int find(int node)
 {
     if (par[node] == -1)
@@ -10,11 +10,11 @@ int find(int node)
     par[node] = leader;
     return leader;
 }
-
-void dsu_union(int node1, int node2)
+void dsu(int node1, int node2)
 {
     int leaderA = find(node1);
     int leaderB = find(node2);
+    
     if (group_size[leaderA] >= group_size[leaderB])
     {
         par[leaderB] = leaderA;
@@ -29,27 +29,22 @@ void dsu_union(int node1, int node2)
 
 int main()
 {
-    memset(par, -1, sizeof(par));
-    memset(group_size,1,sizeof(group_size));
     int n, e;
     cin >> n >> e;
-    int cycle = false;
+    memset(par, -1, sizeof(par));
+    memset(group_size, 1, sizeof(group_size));
+    int cnt = 0;
     while (e--)
     {
         int a, b;
         cin >> a >> b;
         int leaderA = find(a);
-        int leaderB = find(b);  
+        int leaderB = find(b);
         if (leaderA == leaderB)
-        {
-            cycle = true;
-        }
+            cnt++;
         else
-            dsu_union(a, b);
+            dsu(a, b);
     }
-    if (cycle)
-        cout << "Cycle detected" << endl;
-    else
-        cout << "No Cycle" << endl;
+    cout << cnt << endl;
     return 0;
 }
