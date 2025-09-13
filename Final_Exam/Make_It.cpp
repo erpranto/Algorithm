@@ -1,33 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
-long long int dp[100005];
-bool rec(long long int n)
+bool dp[100005];
+bool vis[100005];
+bool rec(int n)
 {
     if (n == 1)
         return true;
     if (n < 1)
         return false;
-    if (dp[n] != -1)
-        return dp[n] == 2;
+    if (vis[n])
+        return dp[n];
 
-    bool res = false;
-    if (rec(n - 3) || n % 2 == 0 && rec(n / 2))
-    {
-        res = true;
-        dp[n] = 2;
-    }
+    bool res = rec(n - 3) || (n % 2 == 0 && rec(n / 2));
+    dp[n] = res;
+    vis[n] = true;
     return res;
 }
 int main()
 {
     int t;
     cin >> t;
+    memset(dp, false, sizeof(dp));
+    memset(vis, false, sizeof(vis));
+
     while (t--)
     {
-        long long int n;
+        int n;
         cin >> n;
-        memset(dp, -1, sizeof(dp));
-
         if (rec(n))
             cout << "YES" << endl;
         else
